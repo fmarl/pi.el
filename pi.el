@@ -519,9 +519,8 @@ Leave out regions of files matching `pi-secret-file-predicate'."
   (pcase-let* ((`(,watch ,action ,file ,new-file) event)
                (file (if (eq action 'renamed) new-file file)))
     (cond ((eq action 'stopped)
-           ;; `pi-mode' forgets a watch before removing it, so this one
-           ;; stopped by itself, as when its directory is deleted.  Do not
-           ;; check for that: a Pi may have created it again already.
+           ;; `pi-mode' forgets its watch before removing it, so this one
+           ;; stopped by itself, e.g. because the directory was deleted.
            (when (equal watch pi--watch)
              (setq pi--watch nil)
              ;; A new watch now would get the descriptor filenotify is

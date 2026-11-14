@@ -1,19 +1,29 @@
 import js from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 
-export default tseslint.config(
+export default defineConfig(
   {
     linterOptions: { reportUnusedDisableDirectives: "error" },
   },
+  js.configs.recommended,
   {
     files: ["emacs-bridge/**/*.ts"],
-    extends: [js.configs.recommended, tseslint.configs.strictTypeChecked, tseslint.configs.stylisticTypeChecked],
+    extends: [tseslint.configs.strictTypeChecked, tseslint.configs.stylisticTypeChecked],
     languageOptions: {
       parserOptions: { projectService: true, tsconfigRootDir: import.meta.dirname },
     },
     rules: {
       "@typescript-eslint/consistent-type-definitions": ["error", "type"],
       "@typescript-eslint/no-confusing-void-expression": ["error", { ignoreArrowShorthand: true }],
+      "@typescript-eslint/no-floating-promises": [
+        "error",
+        {
+          allowForKnownSafeCalls: [
+            { from: "package", package: "node:test", name: ["after", "describe", "it"] },
+          ],
+        },
+      ],
       "@typescript-eslint/restrict-template-expressions": ["error", { allowNumber: true }],
 
       "@typescript-eslint/consistent-type-exports": "error",
@@ -35,11 +45,11 @@ export default tseslint.config(
       "object-shorthand": "error",
       "prefer-template": "error",
 
-      // Pi draws its TUI on the terminal; output of its own corrupts it.
       "no-console": "error",
       "no-restricted-properties": [
         "error",
         { object: "process", property: "exit", message: "An extension must not end Pi." },
+        { object: "process", property: "exitCode", message: "An extension must not end Pi." },
         { object: "process", property: "stdout", message: "Pi owns the terminal; use ctx.ui." },
         { object: "process", property: "stderr", message: "Pi owns the terminal; use ctx.ui." },
       ],
@@ -48,20 +58,21 @@ export default tseslint.config(
         {
           patterns: [{ group: ["@mariozechner/*"], message: "Use the @earendil-works packages." }],
           paths: [
-            { name: "@sinclair/typebox", message: "Import typebox, which Pi maps to its own copy." },
+            {
+              name: "@sinclair/typebox",
+              message: "Import typebox, which Pi maps to its own copy.",
+            },
             {
               name: "@earendil-works/pi-ai",
               importNames: ["Type", "Static", "TSchema"],
               message: "Import these from typebox.",
             },
+            // no-restricted-properties sees only the global.
+            { name: "process", message: "Use the global process." },
+            { name: "node:process", message: "Use the global process." },
           ],
         },
       ],
     },
-  },
-  {
-    // node:test runs describe and it without anyone awaiting them.
-    files: ["emacs-bridge/**/*.test.ts"],
-    rules: { "@typescript-eslint/no-floating-promises": "off" },
   },
 );

@@ -111,13 +111,13 @@ function realPath(file: string): string {
   try {
     return realpathSync(file);
   } catch {
-    // A file Pi is about to create has no real path yet, but its directory may.
+    // The file does not exist yet.
   }
 
   try {
     return join(realpathSync(dirname(file)), basename(file));
   } catch {
-    // Nor its directory; then the path as written is all there is.
+    // Neither does its directory.
   }
 
   return file;

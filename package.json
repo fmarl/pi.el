@@ -6,14 +6,18 @@
   "repository": "github:fmarl/pi.el",
   "private": true,
   "type": "module",
-  "keywords": ["pi-package"],
+  "keywords": [
+    "pi-package"
+  ],
   "pi": {
-    "extensions": ["./emacs-bridge/index.ts"]
+    "extensions": [
+      "./emacs-bridge/index.ts"
+    ]
   },
   "scripts": {
-    "check": "tsc && eslint && prettier --check emacs-bridge",
-    "format": "prettier --write emacs-bridge",
-    "test": "node --test emacs-bridge/*.test.ts"
+    "check": "tsc && eslint && prettier --check .",
+    "format": "prettier --write .",
+    "test": "node --test 'emacs-bridge/**/*.test.ts'"
   },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*",

@@ -68,7 +68,7 @@ export default function (pi: ExtensionAPI): void {
       writeFileSync(temporary, content, { mode: 0o600 });
       renameSync(temporary, bridge.status);
     } catch {
-      // The status only feeds Emacs' mode line. Pi must not fail over it.
+      // Only the mode line reads the status.
     }
   }
 
@@ -160,8 +160,7 @@ export default function (pi: ExtensionAPI): void {
   }
 
   pi.on("session_start", async (_event, ctx) => {
-    // A Pi without a UI, as in `pi -p`, runs for a script and must not
-    // take the directory from an interactive Pi.
+    // `pi -p` must not take the directory from an interactive Pi.
     if (!ctx.hasUI) return;
 
     try {

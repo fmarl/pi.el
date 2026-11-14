@@ -17,5 +17,5 @@
     "skipLibCheck": true,
     "types": ["node"]
   },
-  "include": ["emacs-bridge/*.ts"]
+  "include": ["emacs-bridge/**/*.ts"]
 }

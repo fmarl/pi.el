@@ -54,18 +54,18 @@ Pi and Emacs meet in `$XDG_RUNTIME_DIR/pi/emacs`, or in
 `XDG_RUNTIME_DIR`, which matters when Emacs runs as a service. A Pi
 without a UI, as with `pi -p`, does not serve its directory.
 
-| Key | Command              | Effect                                       |
-|-----|----------------------|----------------------------------------------|
-| `a` | `pi-prompt`          | Send a prompt                                |
-| `l` | `pi-send-location`   | Send a prompt starting with `@file#L4-6`     |
-| `d` | `pi-send-diagnostic` | Ask Pi to fix the diagnostics at point       |
-| `c` | `pi-add-comment`     | Note a review comment on the lines at point  |
-| `s` | `pi-send-comments`   | Send the noted comments as one prompt        |
-| `p` | `pi-run-command`     | Run one of Pi's slash commands               |
-| `k` | `pi-abort`           | Abort what Pi is doing                       |
-| `n` | `pi-new-session`     | Start a new session                          |
-| `m` | `pi-last`            | Show Pi's last answer                        |
-| `r` | `pi-review`          | Open Magit, or VC, on the project            |
+| Key | Command              | Effect                                      |
+| --- | -------------------- | ------------------------------------------- |
+| `a` | `pi-prompt`          | Send a prompt                               |
+| `l` | `pi-send-location`   | Send a prompt starting with `@file#L4-6`    |
+| `d` | `pi-send-diagnostic` | Ask Pi to fix the diagnostics at point      |
+| `c` | `pi-add-comment`     | Note a review comment on the lines at point |
+| `s` | `pi-send-comments`   | Send the noted comments as one prompt       |
+| `p` | `pi-run-command`     | Run one of Pi's slash commands              |
+| `k` | `pi-abort`           | Abort what Pi is doing                      |
+| `n` | `pi-new-session`     | Start a new session                         |
+| `m` | `pi-last`            | Show Pi's last answer                       |
+| `r` | `pi-review`          | Open Magit, or VC, on the project           |
 
 Pi takes up a prompt once it is done. With a prefix argument, it takes
 it up right after its current tool step.
@@ -104,8 +104,8 @@ npm run check
 npm test
 ```
 
-`npm run check` type-checks and lints the extension and checks its
-formatting; `npm run format` formats it with Prettier.
+`npm run check` type-checks and lints the extension and checks the
+formatting; `npm run format` formats with Prettier.
 
 ## License
 
